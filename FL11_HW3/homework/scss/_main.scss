@@ -1,0 +1,294 @@
+$font-weights: (
+    "light": 300,
+    "regular": 400,
+    "medium": 500, 
+    "semi-bold": 600, 
+    "bold": 700,
+    "black": 900
+    );
+
+@mixin text-standart ($fontSize: 20px, $wordSp: 1px, $color: $colorText) {
+    color: $color;
+    font-size: $fontSize;
+    word-spacing: $wordSp;
+    line-height: 1.5;
+}
+
+@mixin header-underline {
+    position: absolute;
+    background-color: $colorUnderline;
+    z-index: -1;    
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    border: none;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+body {
+    font-family: $fontMain;
+    background-color: $colorBackgroundMain;
+}
+
+header.header {
+    min-width: $mainWidth;
+    height: 900px;
+    background-image: $imgBackgroundHeader;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-bottom-right-radius: 760px 360px;
+
+}
+
+.header-wrap {
+    width: $mainWidth;
+    margin: 0 auto;
+    padding: 0 30px;
+    box-sizing: border-box;
+
+}
+
+.landing-logo {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 25px;
+
+    img {
+        width: 55px;
+        height: 55px;
+        margin-right: 19px;
+    }
+    
+    p {
+        font-size: 30px;
+        color: $colorHeaderReady;
+        font-weight: map-get($font-weights, 'semi-bold' );
+        line-height: 1.2;
+       
+        span {
+            display: block;
+            font-size: 13px;
+            text-align: center;
+        }
+    }
+}
+
+.header_heading {
+    position: relative;
+    font-family: $fontHeader;
+    font-size: 90px;
+    font-weight: map-get($font-weights, 'bold' );
+    color: $colorHeaderReady;
+    line-height: 1;
+    width: 610px;
+    padding-top: 92px;
+    z-index: 1;
+
+    &::before {
+        @include header-underline();
+        
+        content: '';
+        left: 0;
+        bottom: 2px;
+        width: 380px;
+        height: 30px;
+    }
+}
+
+.header_text {
+    @include text-standart ($wordSp: 0px, $color: $colorHeaderReady);
+    padding-top: 44px;
+    padding-bottom: 76px;
+    white-space: pre-line;
+    letter-spacing: 0.25px;
+}
+
+.header_button {
+    font-family: $fontHeader;
+    background-color: $colorButton;
+    color: #fff;
+    width: 179px;
+    height: 60px;
+    border-radius: 5px;
+    font-size: 23px;
+    font-weight: map-get($font-weights, 'semi-bold' );
+    cursor: pointer;
+
+    &:hover {
+        background-color: lighten($colorButton, 5%);
+    }
+
+    &:active {
+        background-color: darken($colorButton, 5%);
+        transform: translateY(2px);
+    }
+}
+
+main.section {
+    @extend .header-wrap;
+
+    position: relative;
+}
+
+.section_text {
+    position: relative;
+    font-family: $fontHeader;
+    font-size: 53px;
+    font-weight: map-get($font-weights, 'semi-bold' );
+    text-align: center;
+    color: $colorHeaderReady;
+    margin: 46px 0;
+    letter-spacing: -0.25px;
+    z-index: 1;
+
+    &::before {
+        @include header-underline();
+
+        content: '';
+        right: 522px;
+        bottom: 10px;
+        width: 237px;
+        height: 16px;
+    }
+
+}
+
+.section_card_wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 83px;
+}
+
+.section_card {
+    width: 495px;
+    height: 570px;
+    background-color: $colorBackgroundSecond;
+    padding: 25px;
+    border-radius: $borderRadiusMain;
+    box-sizing: border-box;
+    text-align: center;
+
+    img {
+        width: 100%;
+        border-radius: $borderRadiusMain;
+    }
+
+    .section_card_heading {
+        display: inline-block;
+        position: relative;
+        font-family: $fontHeader;
+        color: #fff;
+        text-align: center;
+        font-weight: map-get($font-weights , 'semi-bold' );
+        font-size: 30px;
+        margin: 8px 0 19px;
+        z-index: 1;
+
+        span {
+            @include header-underline();
+
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 16px;
+        }
+    }
+
+    .section_card_text {
+        @include text-standart();
+        display: flex;
+        height: 29%;
+        align-items: center;
+    }
+
+
+}
+
+.section_banner {
+    position: relative;
+    bottom: -92px;
+    width: 1198px;
+    height: 180px;
+    margin: 0 auto;
+    background: $gradientFooterBanner;
+    border-radius: $borderRadiusMain;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+
+    .section_banner_heading {
+        position: relative;
+        font-family: $fontHeader;
+        font-size: 38px;
+        font-weight: map-get($font-weights, 'bold' );
+        color: $colorHeaderReady;
+        z-index: 1;
+
+        &::before {
+            @include header-underline();
+
+            content: '';
+            left: 152px;
+            bottom: 4px;
+            width: 80px;
+            height: 16px;
+        }
+    }
+
+    p {
+        margin-bottom: 20px;
+    }
+
+    .section_banner_text {
+        @include text-standart($wordSp: 0px);
+    }
+
+    .section_banner_button {
+        @extend .header_button;
+    }
+
+}
+
+footer.footer {
+    width: 100%;
+    height: 302px;
+    background-color: $colorBackgroundSecond;
+}
+
+.footer-wrap {
+    @extend .header-wrap;
+
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 160px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer_logo {
+    padding: 0;
+    
+    p {
+        color: $colorText;
+    }
+}
+
+.footer_text {
+    @include text-standart($fontSize: 17px);
+    width: 370px;   
+}
+
+.footer-cr {
+    @include text-standart($wordSp: 0px);
+}
