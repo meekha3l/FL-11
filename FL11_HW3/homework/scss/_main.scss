@@ -262,6 +262,7 @@ main.section {
 
 footer.footer {
     width: 100%;
+    min-width: $mainWidth;
     height: 302px;
     background-color: $colorBackgroundSecond;
 }

@@ -195,6 +195,7 @@ main.section {
 
 footer.footer {
   width: 100%;
+  min-width: 1596px;
   height: 302px;
   background-color: #21232e; }
 
