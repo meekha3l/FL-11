@@ -285,7 +285,7 @@ footer.footer {
   display: block;
 }
 
-@media (max-width: 1400px) {
+@media screen and (max-width: 1400px) {
 
   header.header,
   main.main,
@@ -343,7 +343,7 @@ footer.footer {
 
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 
   header.header,
   main.main,
