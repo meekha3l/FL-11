@@ -85,6 +85,7 @@ nav.header-nav ul li a {
     font-weight: 300;
     display: flex;
     align-items: center;
+    transition: background-color 0.2s ease;
   }
 
     nav.header-nav ul li a:hover {
@@ -130,6 +131,7 @@ main.main {
     position: absolute;
     width: 100%;
     height: 100%;
+    transition: background-color 0.2s ease;
   }
 
 .article-item__info {
@@ -159,10 +161,11 @@ main.main {
     .article-item__info h2 a {
       color: #fff;
       text-decoration: none;
+      transition: opacity 0.2s ease;
     }
 
       .article-item__info h2 a:hover {
-        color: rgba(255, 255, 255, 0.6);
+        opacity: 0.5;
       }
 
   .article-item__info p {
