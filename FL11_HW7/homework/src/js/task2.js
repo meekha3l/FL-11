@@ -9,8 +9,6 @@ const DIV_BY_HALF = 2
 do {
     playGame = confirm('Do you want to play a game?');
     let randomNum = parseInt( Math.random()*maxRandomNum );
-
-    console.log(randomNum);
     
     if (playGame) {
 

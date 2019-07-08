@@ -7,8 +7,6 @@ let userPass;
 let emailValid = false;
 let passValid = false;
 
-console.log(Object.keys(currentUser).length === 0);
-
 const MIN_EMAIL_LENGHT = 6;
 const MIN_PASSWORD_LENGHT = 5;
 
