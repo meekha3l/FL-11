@@ -4,7 +4,7 @@ function reverseNumber (num) {
     let lastNum;
     while (remNum>0) {
         lastNum = remNum % 10;
-        revNum = revNum * 10 + lastNum ;
+        revNum = revNum * 10 + lastNum;
         remNum = Math.floor(remNum/10);
     }
     return revNum;
