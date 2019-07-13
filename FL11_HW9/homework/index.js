@@ -11,4 +11,14 @@ function findTypes () {
     return types;
 }
 
-console.log(findTypes(null, `hello`, null, true));
+console.log(findTypes(null, 6, `hello`, null, true));
+
+function executeforEach(arr, func) {
+    for (let i = 0; i < arr.length; i++) {
+        func(arr[i]);
+    }
+}
+
+executeforEach([1,2,3], function(el) { 
+    console.log(el) 
+});
