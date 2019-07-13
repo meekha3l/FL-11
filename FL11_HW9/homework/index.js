@@ -3,7 +3,7 @@ let getNumbers = (str) => str.match(/\d/g);
 
 console.log(getNumbers(`n1um3ber95`));
 
-// Task 1
+// Task 01
 function findTypes () {
     let types = {};
     for (let i = 0; i < arguments.length; i++) {
@@ -15,7 +15,7 @@ function findTypes () {
 
 console.log(findTypes(null, 6, `hello`, null, true));
 
-// Task 2
+// Task 02
 function executeforEach(arr, func) {
     for (let i = 0; i < arr.length; i++) {
         func(arr[i]);
@@ -26,7 +26,7 @@ executeforEach([1,2,3], function(el) {
     console.log(el) 
 });
 
-// Task 3
+// Task 03
 function mapArray (arr, func) {
     let transArray = [];
 
@@ -41,7 +41,7 @@ console.log(mapArray([2, 5, 8], function(el) {
     return el + 3 
 }));
 
-// Task 4
+// Task 04
 function filterArray (arr, func) {
     let filtArray = [];
 
@@ -58,10 +58,17 @@ console.log(filterArray([2, 5, 8], function(el) {
     return el > 3 
 }));
 
-//Task 5
+//Task 05
 function showFormattedDate (data) {
-    console.log(typeof data.toString());
     return 'Date: ' + data.toString().substr(4, 11);
 }
 
 console.log(showFormattedDate(new Date('2019-01-27T01:10:00')));
+
+//Task 06
+function canConvertToDate (date) {
+    return !isNaN(new Date(date));
+}
+
+console.log(canConvertToDate(`2016-13-18T00:00:00`));
+console.log(canConvertToDate(`2016-03-18T00:00:00`));
