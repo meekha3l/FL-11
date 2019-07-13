@@ -72,3 +72,13 @@ function canConvertToDate (date) {
 
 console.log(canConvertToDate(`2016-13-18T00:00:00`));
 console.log(canConvertToDate(`2016-03-18T00:00:00`));
+
+//Task 07
+function daysBetween(date1, date2) {
+    let msPerDay = 1000 * 60 * 60 * 24;
+    let utcDate1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+    let utcDate2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+    return Math.floor((utcDate2 - utcDate1) / msPerDay);
+}
+
+console.log(daysBetween(new Date('2016-03-18T00:00:00'), new Date('2016-04-19T00:00:00')));
