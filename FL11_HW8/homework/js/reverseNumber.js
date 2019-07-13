@@ -10,4 +10,4 @@ function reverseNumber (num) {
     return revNum;
 }
   
-  console.log(reverseNumber(24156));
+console.log(reverseNumber(24156));
