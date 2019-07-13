@@ -57,3 +57,11 @@ function filterArray (arr, func) {
 console.log(filterArray([2, 5, 8], function(el) { 
     return el > 3 
 }));
+
+//Task 5
+function showFormattedDate (data) {
+    console.log(typeof data.toString());
+    return 'Date: ' + data.toString().substr(4, 11);
+}
+
+console.log(showFormattedDate(new Date('2019-01-27T01:10:00')));
