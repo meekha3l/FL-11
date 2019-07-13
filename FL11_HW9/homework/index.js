@@ -59,8 +59,9 @@ console.log(filterArray([2, 5, 8], function(el) {
 }));
 
 //Task 05
-function showFormattedDate (data) {
-    return 'Date: ' + data.toString().substr(4, 11);
+function showFormattedDate (date) {
+    let monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `Date: ${monthList[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`;
 }
 
 console.log(showFormattedDate(new Date('2019-01-27T01:10:00')));
