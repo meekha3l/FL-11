@@ -83,3 +83,61 @@ function daysBetween(date1, date2) {
 }
 
 console.log(daysBetween(new Date('2016-03-18T00:00:00'), new Date('2016-04-19T00:00:00')));
+
+//Task 08
+function getAmountOfAdultPeople(data) {
+    let agePeople = [];
+
+    for (let i = 0; i < data.length; i++) {
+        let days = daysBetween(new Date(data[i]['birthday']), new Date());
+        let leapDays = days / 4;
+        let comDays = days - leapDays;
+        let leapYears = leapDays / 366;
+        let comYears = comDays / 365;
+        let years = Math.floor(leapYears + comYears);
+        agePeople.push(years);
+    }
+
+    let amAdult = filterArray(agePeople, function (el) {
+        return el >= 18;
+    });
+
+    return amAdult.length;
+}
+
+let people = [ 
+    {  
+        "_id": "5b5e3168c6bf40f2c1235cd6", 
+        "index": 0, 
+        "birthday": '2016-03-18T00:00:00', 
+        "eyeColor": "green", 
+        "name": "Stein", 
+        "favoriteFruit": "apple" 
+    },  
+    { 
+        "_id": "5b5e3168e328c0d72e4f27d8", 
+        "index": 1, 
+        "birthday": '1991-02-11T00:00:00', 
+        "eyeColor": "blue", 
+        "name": "Cortez", 
+        "favoriteFruit": "strawberry" 
+    }, 
+    { 
+        "_id": "5b5e3168cc79132b631c666a", 
+        "index": 2, 
+        "birthday": '1984-04-17T00:00:00', 
+        "eyeColor": "blue", 
+        "name": "Suzette", 
+        "favoriteFruit": "apple" 
+    }, 
+    {
+        "_id": "5b5e31682093adcc6cd0dde5", 
+        "index": 3, 
+        "birthday": '1994-04-17T00:00:00', 
+        "eyeColor": "green", 
+        "name": "George", 
+        "favoriteFruit": "banana" 
+    }
+];
+
+console.log(getAmountOfAdultPeople(people));
