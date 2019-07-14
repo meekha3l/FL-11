@@ -1,10 +1,18 @@
 // Task 0
-let getNumbers = (str) => str.match(/\d/g);
+function getNumbers(str) {
+    let numbers = [];
+    for (let i = 0; i < str.length; i++) {
+        if (!isNaN(str[i])) {
+            numbers.push(str[i]);
+        }
+    }
+    return numbers;
+}
 
 console.log(getNumbers(`n1um3ber95`));
 
 // Task 01
-function findTypes () {
+function findTypes() {
     let types = {};
     for (let i = 0; i < arguments.length; i++) {
         let type = typeof arguments[i];
@@ -27,7 +35,7 @@ executeforEach([1,2,3], function(el) {
 });
 
 // Task 03
-function mapArray (arr, func) {
+function mapArray(arr, func) {
     let transArray = [];
 
     executeforEach(arr, function(data) {
@@ -42,7 +50,7 @@ console.log(mapArray([2, 5, 8], function(el) {
 }));
 
 // Task 04
-function filterArray (arr, func) {
+function filterArray(arr, func) {
     let filtArray = [];
 
     executeforEach(arr, function(data) {
@@ -59,7 +67,7 @@ console.log(filterArray([2, 5, 8], function(el) {
 }));
 
 //Task 05
-function showFormattedDate (date) {
+function showFormattedDate(date) {
     let monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return `Date: ${monthList[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`;
 }
@@ -67,7 +75,7 @@ function showFormattedDate (date) {
 console.log(showFormattedDate(new Date('2019-01-27T01:10:00')));
 
 //Task 06
-function canConvertToDate (date) {
+function canConvertToDate(date) {
     return !isNaN(new Date(date));
 }
 
@@ -143,7 +151,7 @@ let people = [
 console.log(getAmountOfAdultPeople(people));
 
 //Task 09
-function keys (data) {
+function keys(data) {
     let allKeys = []
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
@@ -156,7 +164,7 @@ function keys (data) {
 console.log(keys({keyOne: 1, keyTwo: 2, keyThree: 3}));
 
 //Task 10
-function values (data) {
+function values(data) {
     let allValues = []
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
