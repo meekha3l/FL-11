@@ -1,11 +1,11 @@
 function Fighter(data) {
-    this.fighter = data,
-    this.wins = 0,
-    this.losses = 0,
-    this.getName = () => this.fighter.name,
-    this.getDamage = () => this.fighter.damage,
-    this.getAgility = () => this.fighter.agility,
-    this.getHealth = () => this.fighter.hp,
+    let fighter = data;
+    let wins = 0;
+    let losses = 0;
+    this.getName = () => fighter.name,
+    this.getDamage = () => fighter.damage,
+    this.getAgility = () => fighter.agility,
+    this.getHealth = () => fighter.hp,
     this.attack = function(opponent) {
         let kick = parseInt( Math.random()*101 );
         if (kick > opponent.getAgility()) {
@@ -16,24 +16,24 @@ function Fighter(data) {
         }
     },
     this.dealDamage = function(damage) {
-        this.fighter.hp -= damage;
-        if (this.fighter.hp < 0) {
-            this.fighter.hp = 0;
+        fighter.hp -= damage;
+        if (fighter.hp < 0) {
+            fighter.hp = 0;
         } 
     },
     this.heal = function(hp) {
-        this.fighter.hp += hp;
-        if (this.fighter.hp > 100) {
-            this.fighter.hp = 100;
+        fighter.hp += hp;
+        if (fighter.hp > 100) {
+            fighter.hp = 100;
         } 
     },
     this.addWin = function() {
-        this.wins++;
+        wins++;
     },
     this.addLose = function() {
-        this.losses++;
+        losses++;
     },
-    this.logCombatHistory = () => console.log(`Name: ${this.getName()}, Wins: ${this.wins}, Losses: ${this.losses}`);
+    this.logCombatHistory = () => console.log(`Name: ${this.getName()}, Wins: ${wins}, Losses: ${losses}`);
 }
 
 function battle(firstFighter, secondFighter) {
