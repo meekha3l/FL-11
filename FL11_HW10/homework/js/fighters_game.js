@@ -2,12 +2,13 @@ function Fighter(data) {
     let fighter = data;
     let wins = 0;
     let losses = 0;
+    const MAX_PROP = 100;
     this.getName = () => fighter.name,
     this.getDamage = () => fighter.damage,
     this.getAgility = () => fighter.agility,
     this.getHealth = () => fighter.hp,
     this.attack = function(opponent) {
-        let kick = parseInt( Math.random()*101 );
+        let kick = parseInt( Math.random()*MAX_PROP );
         if (kick > opponent.getAgility()) {
             opponent.dealDamage(this.getDamage());
             console.log(`${this.getName()} make ${this.getDamage()} damage to ${opponent.getName()}`);
@@ -23,8 +24,8 @@ function Fighter(data) {
     },
     this.heal = function(hp) {
         fighter.hp += hp;
-        if (fighter.hp > 100) {
-            fighter.hp = 100;
+        if (fighter.hp > MAX_PROP) {
+            fighter.hp = MAX_PROP;
         } 
     },
     this.addWin = function() {
