@@ -3,38 +3,50 @@ function Fighter(data) {
     let wins = 0;
     let losses = 0;
     const MAX_PROP = 100;
-    this.getName = () => fighter.name,
-    this.getDamage = () => fighter.damage,
-    this.getAgility = () => fighter.agility,
-    this.getHealth = () => fighter.hp,
-    this.attack = function(opponent) {
+
+    let getName = () => fighter.name;
+    let getDamage = () => fighter.damage;
+    let getAgility = () => fighter.agility;
+    let getHealth = () => fighter.hp;
+    let addWin = () => wins++;
+    let addLose = () => losses++;
+
+    function attack(opponent) {
         let kick = parseInt( Math.random()*MAX_PROP );
         if (kick > opponent.getAgility()) {
-            opponent.dealDamage(this.getDamage());
-            console.log(`${this.getName()} make ${this.getDamage()} damage to ${opponent.getName()}`);
+            opponent.dealDamage(getDamage());
+            console.log(`${getName()} make ${getDamage()} damage to ${opponent.getName()}`);
         } else {
-            console.log(`${this.getName()} attack missed`);
+            console.log(`${getName()} attack missed`);
         }
-    },
-    this.dealDamage = function(damage) {
+    }
+    
+    function dealDamage(damage) {
         fighter.hp -= damage;
         if (fighter.hp < 0) {
             fighter.hp = 0;
         } 
-    },
-    this.heal = function(hp) {
+    }
+
+    function heal(hp) {
         fighter.hp += hp;
         if (fighter.hp > MAX_PROP) {
             fighter.hp = MAX_PROP;
         } 
-    },
-    this.addWin = function() {
-        wins++;
-    },
-    this.addLose = function() {
-        losses++;
-    },
-    this.logCombatHistory = () => console.log(`Name: ${this.getName()}, Wins: ${wins}, Losses: ${losses}`);
+    }
+
+    return {
+        getName: getName,
+        getDamage: getDamage,
+        getAgility: getAgility,
+        getHealth: getHealth,
+        addWin: addWin,
+        addLose: addLose,
+        dealDamage: dealDamage,
+        attack: attack,
+        heal: heal,
+        logCombatHistory: () => console.log(`Name: ${getName()}, Wins: ${wins}, Losses: ${losses}`)
+    }
 }
 
 function battle(firstFighter, secondFighter) {
