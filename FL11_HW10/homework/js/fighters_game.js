@@ -27,14 +27,13 @@ function Fighter(data) {
             this.fighter.hp = 100;
         } 
     },
-    this.addWin = function(win) {
-        this.wins += win;
+    this.addWin = function() {
+        this.wins++;
     },
-    this.addLose = function(lose) {
-        this.losses += lose;
+    this.addLose = function() {
+        this.losses++;
     },
     this.logCombatHistory = () => console.log(`Name: ${this.getName()}, Wins: ${this.wins}, Losses: ${this.losses}`);
-    console.log(this);
 }
 
 function battle(firstFighter, secondFighter) {
@@ -45,12 +44,12 @@ function battle(firstFighter, secondFighter) {
             secondFighter.getHealth() && fight > 0 ? secondFighter.attack(firstFighter) : fight = false;
         }
         if (firstFighter.getHealth() > 0) {
-            firstFighter.addWin(1);
-            secondFighter.addLose(1);
+            firstFighter.addWin();
+            secondFighter.addLose();
             console.log(`${firstFighter.getName()} win!`);
         } else {
-            secondFighter.addWin(1);
-            firstFighter.addLose(1);
+            secondFighter.addWin();
+            firstFighter.addLose();
             console.log(`${secondFighter.getName()} win!`);
         }
     } else {
