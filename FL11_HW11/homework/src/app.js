@@ -50,39 +50,4 @@ function addItem(value) {
         console.log(`full`);
     }
 
-    // console.log(todoList.getElementsByTagName(`fieldset`).length);
-
-} 
-
-// let todoList = document.getElementById(`todoList`);
-
-// document.getElementById('addItem').addEventListener('click', () => {addIthem(document.getElementById('dataItem').value)}, false);
-// let testClass = 0;
-// function addIthem(sometext) {
-//     let newItem = document.createElement('p');
-//     newItem.classList.add(testClass++);
-//     newItem.innerHTML = document.getElementById('dataItem').value;
-//     console.log(document.getElementById('dataItem').value);
-//     console.log(sometext);
-//     todoList.appendChild(newItem);
-
-//     let p = document.getElementsByTagName('p');
-//     for (let i = 0; i < p.length; i++) {
-//         p[i].addEventListener('click', someFunc);
-//         console.log(p[i]);
-//     }
-// }
-
-// function someFunc() {
-//     console.log(this);
-// }
-
-// let pTag = document.createElement('p');
-// pTag.classList.add('asd');
-// let divTag = document.createElement('div');
-// let spanTag = document.createElement('span');
-// divTag.innerHTML += pTag.outerHTML + spanTag.outerHTML;
-// console.log(divTag);
-
-// console.log(document.querySelector('#todoAdd input'));
-// console.log(document.querySelector('#todoAdd button'));
+}
