@@ -6,3 +6,8 @@
 fieldset {
     border: none;
 }
+
+.hide {
+    display: none;
+}
+

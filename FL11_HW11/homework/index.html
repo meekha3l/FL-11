@@ -12,11 +12,11 @@
       <h1>TODO Cat List</h1>
     </header>
     <main>
-      <form onkeypress="return event.keyCode != 13">
+      <form>
         <fieldset id="todoAdd">
           <input type="text" name="addItem" id="addItem">
-          <!-- <input type="button" value="addItem"> -->
-          <button type="button">add</button>
+          <input type="text" class="hide" value="fix">
+          <button type="button" class="material-icons">add</button>
         </fieldset>
         <fieldset id="todoList"></fieldset>
       </form>
