@@ -6,7 +6,7 @@ let addField = document.querySelector('#todoAdd input');
 let todoList = document.getElementById(`todoList`);
 let form = document.querySelector(`form`);
 let itemNum = 0;
-let itemsAmount = [];
+let allItems = [];
 const MAX_ITEMS = 9;
 const KEY_ENT = 13;
 
@@ -23,9 +23,9 @@ addField.addEventListener(`keyup`, function(e) {
 });
 
 function addItem(value) {
-    itemsAmount = todoList.getElementsByTagName(`div`);
+    allItems = todoList.querySelectorAll(`.item`);
 
-    if (itemsAmount.length <= MAX_ITEMS) {
+    if (allItems.length <= MAX_ITEMS) {
         let fieldset = document.createElement(`div`);
         let checkbox = document.createElement(`input`);
         let label = document.createElement(`label`);
@@ -53,7 +53,7 @@ function addItem(value) {
     
         todoList.appendChild(fieldset);
         
-        listenerItems();
+        listenerItems(fieldset);
     } else {
             let p = document.createElement(`p`);
 
@@ -66,16 +66,14 @@ function addItem(value) {
 
 }
 
-function listenerItems() {
-    let btnsEdit = todoList.querySelectorAll(`.btn-edit`);
-    let btnsDel = todoList.querySelectorAll(`.btn-del`);
-    let checkboxes = todoList.querySelectorAll(`.checkmark`);
-
-    for (let i = 0; i < btnsEdit.length; i++) {
-        btnsEdit[i].addEventListener(`click`, editItem, false);
-        btnsDel[i].addEventListener(`click`, delItem, false);
-        checkboxes[i].addEventListener(`click`, disableItem, false);
-    }
+function listenerItems(item) {
+    let btnsEdit = item.querySelector(`.btn-edit`);
+    let btnsDel = item.querySelector(`.btn-del`);
+    let checkboxes = item.querySelector(`.checkmark`);   
+    
+    btnsEdit.addEventListener(`click`, editItem, false);
+    btnsDel.addEventListener(`click`, delItem, false);
+    checkboxes.addEventListener(`click`, disableItem, false);
 }
 
 function editItem() {
@@ -100,7 +98,6 @@ function editItem() {
     wrapFieldset.appendChild(inputText);
     wrapFieldset.appendChild(btnSave);
 
-
     btnSave.addEventListener(`click`, () => {
         changeItem(inputText.value);
     }, false);
@@ -114,8 +111,9 @@ function editItem() {
 
 function delItem() {
     this.parentElement.remove();
+    allItems = todoList.querySelectorAll(`.item`);
 
-    if(itemsAmount.length === MAX_ITEMS) {
+    if(allItems.length === MAX_ITEMS) {
         header.querySelector(`p`).remove();
         addField.removeAttribute(`disabled`);
         addBtn.removeAttribute(`disabled`);
@@ -127,7 +125,7 @@ function disableItem() {
     this.parentElement.querySelector(`.btn-edit`).setAttribute(`disabled`, `disabled`);
 }
 
-function changeClasses (data, className, removeClasses = false) {
+function changeClasses(data, className, removeClasses = false) {
     for (let i = 0; i < data.length; i++) {
         removeClasses ? data[i].classList.remove(className) : data[i].classList.add(className);
     }
