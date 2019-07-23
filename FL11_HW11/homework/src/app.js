@@ -82,7 +82,6 @@ function listenerItems(item) {
     item.addEventListener('dragover', dragOver, false);
     item.addEventListener('dragleave', dragLeave, false);
     item.addEventListener('drop', dragDrop, false);
-    // item.addEventListener(`dragend`, dragEnd, false);
 }
 
 function editItem() {
@@ -140,30 +139,23 @@ function changeClasses(data, className, removeClasses = false) {
     }
 }
 
-// onkeypress="return event.keyCode != 13"
-
-function insertAfter(itemBot, itemDrop) {
-    itemBot.parentNode.insertBefore(itemDrop, itemBot.nextSibling);
-}
-
 function dragStart() {
     dragItem = this;
 }
 
-function dragEnd() {
-    console.log(`end`);
-}
 function dragEnter() {
     this.classList.add(`drag-over`);
 }
+
 function dragOver(e) {
     e.preventDefault();
 }
+
 function dragLeave() {
     this.classList.remove(`drag-over`);
 }
+
 function dragDrop() {
     this.classList.remove(`drag-over`);
-    // insertAfter(this, dragItem);
     this.parentNode.insertBefore(dragItem, this);
 }
