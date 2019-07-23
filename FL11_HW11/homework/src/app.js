@@ -56,8 +56,6 @@ function addItem(value) {
         todoList.appendChild(fieldset);
         listenerItems(fieldset);
 
-        allItems = todoList.querySelectorAll(`.item`);
-
     } else if (allItems.length === MAX_ITEMS) {
             let p = document.createElement(`p`);
 
@@ -135,7 +133,7 @@ function delItem() {
         addField.removeAttribute(`disabled`);
         addBtn.removeAttribute(`disabled`);
     }
-    
+
     this.parentElement.remove();
     allItems = todoList.querySelectorAll(`.item`);
 }
