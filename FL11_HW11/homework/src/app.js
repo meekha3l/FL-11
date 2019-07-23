@@ -6,6 +6,7 @@ let addField = document.querySelector('#todoAdd input');
 let todoList = document.getElementById(`todoList`);
 let form = document.querySelector(`form`);
 let itemNum = 0;
+let dragItem;
 let allItems = [];
 const MAX_ITEMS = 9;
 const KEY_ENT = 13;
@@ -49,6 +50,7 @@ function addItem(value) {
         label.innerHTML = value;
 
         fieldset.classList.add(`item`);
+        fieldset.setAttribute(`draggable`, `true`);
         fieldset.innerHTML += checkbox.outerHTML + label.outerHTML + btnEdit.outerHTML + btnDel.outerHTML;
     
         todoList.appendChild(fieldset);
@@ -74,6 +76,13 @@ function listenerItems(item) {
     btnEdit.addEventListener(`click`, editItem, false);
     btnDel.addEventListener(`click`, delItem, false);
     checkbox.addEventListener(`click`, disableItem, false);
+    
+    item.addEventListener(`dragstart`, dragStart, false);
+    item.addEventListener('dragenter', dragEnter, false)
+    item.addEventListener('dragover', dragOver, false);
+    item.addEventListener('dragleave', dragLeave, false);
+    item.addEventListener('drop', dragDrop, false);
+    // item.addEventListener(`dragend`, dragEnd, false);
 }
 
 function editItem() {
@@ -132,3 +141,29 @@ function changeClasses(data, className, removeClasses = false) {
 }
 
 // onkeypress="return event.keyCode != 13"
+
+function insertAfter(itemBot, itemDrop) {
+    itemBot.parentNode.insertBefore(itemDrop, itemBot.nextSibling);
+}
+
+function dragStart() {
+    dragItem = this;
+}
+
+function dragEnd() {
+    console.log(`end`);
+}
+function dragEnter() {
+    this.classList.add(`drag-over`);
+}
+function dragOver(e) {
+    e.preventDefault();
+}
+function dragLeave() {
+    this.classList.remove(`drag-over`);
+}
+function dragDrop() {
+    this.classList.remove(`drag-over`);
+    // insertAfter(this, dragItem);
+    this.parentNode.insertBefore(dragItem, this);
+}
