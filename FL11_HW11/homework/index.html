@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>Homework 11 - TODO Cat List</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet">
   <link rel="stylesheet" href="./assets/material-icons/material-icons.css">
   <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
   <div id="root">
-    <header>
+    <header class="header">
       <h1>TODO Cat List</h1>
     </header>
     <main>
       <form>
-        <fieldset id="todoAdd">
-          <input type="text" name="addItem" id="addItem">
+        <div id="todoAdd" class="todo-add">
+          <input type="text" name="addItem" id="addItem" class="add-field" placeholder="Add action">
           <input type="text" class="hide" value="fix">
-          <button type="button" class="material-icons">add</button>
-        </fieldset>
-        <fieldset id="todoList"></fieldset>
+          <button type="button" class="material-icons add-btn">add</button>
+        </div>
+        <div id="todoList"></div>
       </form>
     </main>
   </div>

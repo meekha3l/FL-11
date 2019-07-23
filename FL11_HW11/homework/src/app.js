@@ -24,7 +24,7 @@ addField.addEventListener(`keyup`, function(e) {
 function addItem(value) {
 
     if (itemsAmount.length < MAX_ITEMS) {
-        let fieldset = document.createElement(`fieldset`);
+        let fieldset = document.createElement(`div`);
         let checkbox = document.createElement(`input`);
         let label = document.createElement(`label`);
         let btnEdit = document.createElement(`button`);
@@ -33,6 +33,7 @@ function addItem(value) {
     
         checkbox.type = `checkbox`;
         checkbox.id = itemId;
+        checkbox.classList.add(`material-icons`, `checkmark`);
 
         btnEdit.classList.add(`material-icons`, `btn-edit`);
         btnEdit.type = `button`;
@@ -45,11 +46,13 @@ function addItem(value) {
         label.setAttribute(`for`, itemId);
         label.innerHTML = value;
 
+        fieldset.classList.add(`item`);
         fieldset.innerHTML += checkbox.outerHTML + label.outerHTML + btnEdit.outerHTML + btnDel.outerHTML;
     
         todoList.appendChild(fieldset);
-        itemsAmount = todoList.getElementsByTagName(`fieldset`);
+        itemsAmount = todoList.getElementsByTagName(`div`);
         listenerItems();
+
     } else {
         console.log(`full`);
     }
@@ -69,7 +72,7 @@ function listenerItems() {
 function editItem() {
     let inputText = document.createElement(`input`);
     let btnSave = document.createElement(`button`);
-    let wrapFieldset = document.createElement(`fieldset`);
+    let wrapFieldset = document.createElement(`div`);
     let mainFieldset = this.parentElement;
     let mainElements = mainFieldset.children;
     let label = mainFieldset.querySelector(`label`);
@@ -78,6 +81,7 @@ function editItem() {
     btnSave.type = `button`;
     btnSave.innerHTML = `save`;
 
+    inputText.classList.add(`item-input`);
     inputText.type = `text`;
     inputText.value = label.textContent;
 

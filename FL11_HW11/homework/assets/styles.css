@@ -7,7 +7,116 @@ fieldset {
     border: none;
 }
 
+input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+input:focus {
+    outline: 0;
+    border: 1px solid #3cb2fe;
+}
+
+button {
+    border: none;
+    vertical-align: top;
+}
+
+button:focus {
+    outline: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #3cb2fe;
+}
+
 .hide {
     display: none;
 }
 
+div#root {
+    max-width: 1024px;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 0 30px;
+}
+
+header.header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.todo-add {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 5px solid #e3f2ff;
+}
+
+    .add-field {
+        width: 100%;
+        height: 35px;
+        margin-right: 15px;
+    }
+
+    .add-btn {
+        width: 35px;
+        height: 35px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        font-size: 35px;
+        background-color: #ccc;
+        color: #fff;
+    }
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+    .checkmark {
+        position: relative;
+        width: 0;
+        height: 25px;
+    }
+
+        .checkmark::before {
+            content: '';
+            display: block;
+            width: 25px;
+            height: 25px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .checkmark:checked::before{
+            content: 'done';
+            background-color: #ccc;
+            color: #fff;
+        }
+
+    .item label{
+        margin-left: 35px;
+    }
+
+    .btn-edit,
+    .btn-del {
+        width: 25px;
+        height: 25px;
+        background-color: transparent;
+        color: #89c4f4;
+        margin: 0 5px;
+    }
+
+    .btn-del {
+        margin-left: auto;
+    }
+
+    .item-input {
+        height: 25px;
+    }
