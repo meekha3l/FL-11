@@ -8,7 +8,7 @@ let form = document.querySelector(`form`);
 let itemNum = 0;
 let dragItem;
 let allItems = [];
-const MAX_ITEMS = 9;
+const MAX_ITEMS = 10;
 const KEY_ENT = 13;
 
 addBtn.addEventListener(`click`, () => {
@@ -26,7 +26,7 @@ addField.addEventListener(`keyup`, function(e) {
 function addItem(value) {
     allItems = todoList.querySelectorAll(`.item`);
 
-    if (allItems.length <= MAX_ITEMS) {
+    if (value && allItems.length < MAX_ITEMS) {
         let fieldset = document.createElement(`div`);
         let checkbox = document.createElement(`input`);
         let label = document.createElement(`label`);
@@ -54,9 +54,11 @@ function addItem(value) {
         fieldset.innerHTML += checkbox.outerHTML + label.outerHTML + btnEdit.outerHTML + btnDel.outerHTML;
     
         todoList.appendChild(fieldset);
-        
         listenerItems(fieldset);
-    } else {
+
+        allItems = todoList.querySelectorAll(`.item`);
+
+    } else if (allItems.length === MAX_ITEMS) {
             let p = document.createElement(`p`);
 
             p.innerHTML = `Maximum item per list are created`;
@@ -110,22 +112,32 @@ function editItem() {
         changeItem(inputText.value);
     }, false);
 
+    inputText.addEventListener(`keyup`, function(e) {
+        if (e.keyCode === KEY_ENT) {
+            e.preventDefault();
+            btnSave.click();
+        }
+    });
+
     function changeItem(value) {
-        label.innerHTML = value;
+        if(value) {
+            label.innerHTML = value;
+        }
+
         changeClasses(mainElements, `hide`, true);
         wrapFieldset.remove();
     }
 }
 
 function delItem() {
-    this.parentElement.remove();
-    allItems = todoList.querySelectorAll(`.item`);
-
     if(allItems.length === MAX_ITEMS) {
         header.querySelector(`p`).remove();
         addField.removeAttribute(`disabled`);
         addBtn.removeAttribute(`disabled`);
     }
+    
+    this.parentElement.remove();
+    allItems = todoList.querySelectorAll(`.item`);
 }
 
 function disableItem() {
