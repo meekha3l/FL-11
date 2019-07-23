@@ -113,6 +113,10 @@ header.header {
         margin: 0 5px;
     }
 
+    .btn-edit:disabled {
+        color: #ccc;
+    }
+
     .btn-del {
         margin-left: auto;
     }

@@ -62,10 +62,12 @@ function addItem(value) {
 function listenerItems() {
     let btnsEdit = todoList.querySelectorAll(`.btn-edit`);
     let btnsDel = todoList.querySelectorAll(`.btn-del`);
-    console.log(btnsDel);
+    let checkboxes = todoList.querySelectorAll(`.checkmark`);
+
     for (let i = 0; i < btnsEdit.length; i++) {
         btnsEdit[i].addEventListener(`click`, editItem, false);
         btnsDel[i].addEventListener(`click`, delItem, false);
+        checkboxes[i].addEventListener(`click`, disableItem, false);
     }
 }
 
@@ -105,6 +107,11 @@ function editItem() {
 
 function delItem() {
     this.parentElement.remove();
+}
+
+function disableItem() {
+    this.setAttribute(`disabled`, `disabled`);
+    this.parentElement.querySelector(`.btn-edit`).setAttribute(`disabled`, `disabled`);
 }
 
 function changeClasses (data, className, removeClasses = false) {
