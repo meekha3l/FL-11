@@ -19,9 +19,25 @@ input:focus {
     border: 1px solid #3cb2fe;
 }
 
+input[type=checkbox] {
+    cursor: pointer;
+}
+
+input[type=checkbox]:disabled {
+    cursor: default;
+}
+
 button {
     border: none;
     vertical-align: top;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:hover:disabled {
+    cursor: default;
 }
 
 button:focus {
@@ -49,6 +65,13 @@ header.header {
     margin-bottom: 15px;
 }
 
+    header.header p {
+        border: 1px solid #3cb2fe;
+        background-color: #e3f2ff;
+        margin-top: 10px;
+        padding: 15px 15px;
+    }
+
 .todo-add {
     display: flex;
     justify-content: space-around;
@@ -72,6 +95,14 @@ header.header {
         background-color: #ccc;
         color: #fff;
     }
+
+        .add-btn:hover {
+            background-color: #3cb2fe;
+        }
+
+        .add-btn:hover:disabled {
+            background-color: #ccc;
+        }
 
 .item {
     display: flex;

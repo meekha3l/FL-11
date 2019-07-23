@@ -1,12 +1,13 @@
 let rootNode = document.getElementById('root');
 
+let header = document.querySelector(`header.header`);
 let addBtn = document.querySelector('#todoAdd button');
 let addField = document.querySelector('#todoAdd input');
 let todoList = document.getElementById(`todoList`);
 let form = document.querySelector(`form`);
 let itemNum = 0;
 let itemsAmount = [];
-const MAX_ITEMS = 10;
+const MAX_ITEMS = 9;
 const KEY_ENT = 13;
 
 addBtn.addEventListener(`click`, () => {
@@ -22,8 +23,9 @@ addField.addEventListener(`keyup`, function(e) {
 });
 
 function addItem(value) {
+    itemsAmount = todoList.getElementsByTagName(`div`);
 
-    if (itemsAmount.length < MAX_ITEMS) {
+    if (itemsAmount.length <= MAX_ITEMS) {
         let fieldset = document.createElement(`div`);
         let checkbox = document.createElement(`input`);
         let label = document.createElement(`label`);
@@ -50,11 +52,16 @@ function addItem(value) {
         fieldset.innerHTML += checkbox.outerHTML + label.outerHTML + btnEdit.outerHTML + btnDel.outerHTML;
     
         todoList.appendChild(fieldset);
-        itemsAmount = todoList.getElementsByTagName(`div`);
+        
         listenerItems();
-
     } else {
-        console.log(`full`);
+            let p = document.createElement(`p`);
+
+            p.innerHTML = `Maximum item per list are created`;
+            header.appendChild(p);
+
+            addField.setAttribute(`disabled`, `disabled`);
+            addBtn.setAttribute(`disabled`, `disabled`);
     }
 
 }
@@ -107,6 +114,12 @@ function editItem() {
 
 function delItem() {
     this.parentElement.remove();
+
+    if(itemsAmount.length === MAX_ITEMS) {
+        header.querySelector(`p`).remove();
+        addField.removeAttribute(`disabled`);
+        addBtn.removeAttribute(`disabled`);
+    }
 }
 
 function disableItem() {
