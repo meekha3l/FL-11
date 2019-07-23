@@ -67,13 +67,13 @@ function addItem(value) {
 }
 
 function listenerItems(item) {
-    let btnsEdit = item.querySelector(`.btn-edit`);
-    let btnsDel = item.querySelector(`.btn-del`);
-    let checkboxes = item.querySelector(`.checkmark`);   
+    let btnEdit = item.querySelector(`.btn-edit`);
+    let btnDel = item.querySelector(`.btn-del`);
+    let checkbox = item.querySelector(`.checkmark`);   
     
-    btnsEdit.addEventListener(`click`, editItem, false);
-    btnsDel.addEventListener(`click`, delItem, false);
-    checkboxes.addEventListener(`click`, disableItem, false);
+    btnEdit.addEventListener(`click`, editItem, false);
+    btnDel.addEventListener(`click`, delItem, false);
+    checkbox.addEventListener(`click`, disableItem, false);
 }
 
 function editItem() {
