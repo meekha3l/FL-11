@@ -1,0 +1,94 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+button {
+    /* width: max-content;
+    border-radius: 10px;
+    padding: 4px 20px;
+    font-size: 16px; */
+    vertical-align: top;
+}
+
+ul {
+    list-style: none;
+}
+
+#root {
+    max-width: 1024px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.wrap {
+    display: flex;
+    flex-flow: wrap column;
+    align-items: center;
+}
+
+.wrap header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.wrap header h2 {
+    font-size: 32px;
+}
+
+.wrap button {
+    /* margin-bottom: 15px; */
+}
+
+.del-btn {
+    width: 35px;
+    height: 35px;
+    border: none;
+    background-image: url(img/remove-s.jpg);
+}
+
+.wrap ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.task {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.task input {
+    position: absolute;
+    opacity: 0;
+}
+
+.checkmark {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url(img/todo-s.png);
+}
+
+.task input:checked ~ .checkmark {
+    background-image: url(img/done-s.png);
+}
+
+.task-checked {
+    order: 1;
+    opacity: 0.5;
+}
+
+.task-name {
+    width: 250px;
+    font-size: 20px;
+    text-align: center;
+    padding-left: 12px;
+    padding-right: 9px;
+}
