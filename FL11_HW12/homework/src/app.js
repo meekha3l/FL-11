@@ -277,7 +277,6 @@ function getTaskId(id) {
 
 // Get all tasks from localStorage (array)
 function getTasksData() {
-
     let values = [];
     let keys = Object.keys(localStorage);
 
