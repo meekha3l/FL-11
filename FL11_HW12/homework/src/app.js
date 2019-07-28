@@ -1,9 +1,5 @@
 const rootNode = document.getElementById('root');
 
-const todoItems = [
-    {isDone: false, id: 12345, description: 'Todo 1'}
-];
-
 let locHash = location.hash;
 let newId = getMaxId();
 
@@ -223,7 +219,7 @@ function checkStatus() {
 
 // Set modify task in localStorage
 function editTask() {
-    let input = this.parentElement.querySelector(`input[type=text]`);
+    let input = this.parentElement.parentElement.querySelector(`input[type=text]`);
     let inputValue = input.value;
     let taskId = getTaskId(location.hash);
     let taskData = getTaskDataById(taskId);
