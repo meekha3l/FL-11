@@ -25,6 +25,7 @@ const eng = {
 
 window.addEventListener(`hashchange`, hashListener);
 
+// Listen HASH
 function hashListener() {
     locHash = location.hash;
     if (locHash.includes(`modify`)) {
@@ -48,6 +49,7 @@ function hashListener() {
     }
 }
 
+// Generate Home page
 function homePage() {
     console.log(`is home`);
     removeWrap();
@@ -75,15 +77,6 @@ function homePage() {
     btn.addEventListener(`click`, () => {
         location.hash = '/add';
     });
-
-    // let keys = Object.keys(localStorage);
-
-    // for (let i = 0; i < keys.length; i++) {
-    //     let localItem = localStorage.getItem(keys[i]);
-    //     let task = getTasks(JSON.parse(localItem));
-    //     taskListener(task);
-    //     ul.appendChild(task);
-    // }
     
     let allTasks = getTasksData();
     allTasks.forEach(el => {
@@ -94,6 +87,7 @@ function homePage() {
 
 }
 
+// Generate Add and Modify page
 function addPage(newTask = true) {
     console.log(`is add page`);
     removeWrap();
@@ -156,6 +150,7 @@ function addPage(newTask = true) {
     rootNode.appendChild(wrap);
 }
 
+// Generate all tasks
 function getTasks(data) {
     let li = document.createElement(`li`);
     let input = document.createElement(`input`);
@@ -167,7 +162,6 @@ function getTasks(data) {
     input.id = `checkbox-${data.id}`;
     if (data.isDone) {
         input.setAttribute(`checked`, `checked`);
-        // input.setAttribute(`disabled`, `disabled`);
         li.classList.add(`task-checked`);
     }
 
@@ -186,6 +180,7 @@ function getTasks(data) {
     return li;
 }
 
+// Set new task in localStorage
 function addTask(isDone, id, description) {
     let task = {};
     task.isDone = isDone;
@@ -195,6 +190,7 @@ function addTask(isDone, id, description) {
     location.hash = '/list';
 }
 
+// Listen task items
 function taskListener(item) {
     let checkbox = item.querySelector(`input`);
     let text = item.querySelector(`span`);
@@ -209,6 +205,7 @@ function taskListener(item) {
     checkbox.addEventListener(`click`, checkStatus);
 }
 
+// Check and change Checkbox status
 function checkStatus() {
     let taskItem = this.parentElement;
     let thisId = getTaskId(taskItem.id);
@@ -222,11 +219,10 @@ function checkStatus() {
         taskItem.classList.add(`task-checked`);
     }
 
-    // this.setAttribute(`disabled`, `disabled`); 
-    // taskItem.classList.add(`task-checked`);
     localStorage.setItem(`id${thisId}`, JSON.stringify(taskData));
 }
 
+// Set modify task in localStorage
 function editTask() {
     let input = this.parentElement.querySelector(`input[type=text]`);
     let inputValue = input.value;
@@ -245,6 +241,7 @@ function editTask() {
     }
 }
 
+// Remove task from localStorage
 function removeTask() {
     let task = this.parentElement;
     let thisId = getTaskId(task.id);
@@ -252,6 +249,7 @@ function removeTask() {
     task.remove();
 }
 
+// Clearing а page
 function removeWrap() {
     let rootNodeWrap = rootNode.querySelector(`.wrap`);
     if (rootNodeWrap) {
@@ -259,34 +257,8 @@ function removeWrap() {
     }   
 }
 
-// function getMaxId() {
-//     let keys = Object.keys(localStorage);
-//     let maxId = 0;
-
-//     for (let i = 0; i < keys.length; i++) {
-//         let localItem = localStorage.getItem(keys[i]);
-//         let task = JSON.parse(localItem);
-//         let taskId = Math.floor(task.id);
-//         if (taskId > maxId) {
-//             maxId = taskId;
-//         }
-//     }
-
-//     return maxId;    
-// }
-
+// Get Max ID (closure)
 function getMaxId() {
-    // let keys = Object.keys(localStorage);
-    // let maxId = 0;
-
-    // for (let i = 0; i < keys.length; i++) {
-    //     let localItem = localStorage.getItem(keys[i]);
-    //     let task = JSON.parse(localItem);
-    //     let taskId = Math.floor(task.id);
-    //     if (taskId > maxId) {
-    //         maxId = taskId;
-    //     }
-    // }
 
     let tasksData = getTasksData();
     let maxId = 0;
@@ -303,24 +275,12 @@ function getMaxId() {
     return newId;
 }
 
+// Get ID from string
 function getTaskId(id) {
     return Math.floor(id.match(/\d+$/)[0]);
 }
 
-hashListener();
-
-// hamePage();
-
-// function createElements(obj) {
-//     let elements = {};
-//     let keys = Object.keys(obj);
-//     let values = Object.values(obj);
-//     for (let i = 0; i < keys.length; i++) {
-//         elements[keys[i]] = document.createElement(values[i]);
-//     }
-//     return elements;
-// }
-
+// Get all tasks from localStorage (array)
 function getTasksData() {
 
     let values = [];
@@ -334,6 +294,14 @@ function getTasksData() {
     return values;
 }
 
+// Get task data by ID (obj) 
+function getTaskDataById(id) {
+    let dataLS = localStorage.getItem(`id${id}`);
+    let task = JSON.parse(dataLS);
+    return task;
+}
+
+// A check for existence of the Description
 function findTaskDesc(description) {
     let taskData = getTasksData();
     return taskData.some( function(el) {
@@ -341,12 +309,7 @@ function findTaskDesc(description) {
     });
 }
 
-function getTaskDataById(id) {
-    let dataLS = localStorage.getItem(`id${id}`);
-    let task = JSON.parse(dataLS);
-    return task;
-}
-
+// Generate Alert container
 function errorAlert(desc) {
     let div = document.createElement(`div`);
     let p = document.createElement(`p`);
@@ -368,19 +331,6 @@ function errorAlert(desc) {
         clearTimeout(timeToRemove);
         div.remove();
     });
-} 
+}
 
-// function getTaskDataById(id) {
-//     let tasks = getTasksData();
-//     let task = {};
-
-//     tasks.forEach(el => {
-//         if (el.id === id) {
-//             task = el;
-//         }
-//     });
- 
-//     return task;
-// }
-
-// rootNode.appendChild(/* Append your list item node*/);
+hashListener();
