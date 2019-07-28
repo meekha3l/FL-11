@@ -65,6 +65,7 @@ function homePage() {
 
     btn.innerHTML = eng.addBtn;
     btn.type = `button`;
+    btn.classList.add(`btn`);
 
     rootNode.appendChild(wrap);
     wrap.appendChild(header);
@@ -102,19 +103,23 @@ function addPage(newTask = true) {
     let input = document.createElement(`input`);
     let btnSave = document.createElement(`button`);
     let btnCancel = document.createElement(`button`);
+    let wrapBtn = document.createElement(`div`);
     let wrap = document.createElement(`div`);
 
     header.appendChild(h2);
     input.type = `text`;
     btnSave.type = `button`;
+    btnSave.classList.add(`btn`);
 
     btnCancel.type = `button`;
     btnCancel.innerHTML = eng.btnCancel;
+    btnCancel.classList.add(`btn`);
     btnCancel.addEventListener(`click`, () => {
         location.hash = `/list`;
     });
 
     wrap.classList.add(`wrap`);
+    wrapBtn.classList.add(`wrap-btn`);
 
     if(newTask) {
         h2.innerHTML = eng.addHeader;
@@ -143,11 +148,12 @@ function addPage(newTask = true) {
         }
     }
 
-    rootNode.appendChild(wrap);
+    wrapBtn.appendChild(btnSave);
+    wrapBtn.appendChild(btnCancel);
     wrap.appendChild(header);
     wrap.appendChild(input);
-    wrap.appendChild(btnSave);
-    wrap.appendChild(btnCancel);
+    wrap.appendChild(wrapBtn);
+    rootNode.appendChild(wrap);
 }
 
 function getTasks(data) {

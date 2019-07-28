@@ -31,67 +31,79 @@ ul {
     align-items: center;
 }
 
-.wrap header {
-    text-align: center;
-    margin-bottom: 15px;
-}
+    .wrap header {
+        text-align: center;
+        margin-bottom: 15px;
+    }
 
-.wrap header h2 {
-    font-size: 32px;
-}
+    .wrap header h2 {
+        font-size: 32px;
+    }
 
-.wrap button {
-    /* margin-bottom: 15px; */
-}
+    .wrap input[type=text] {
+        font-size: 16px;
+        border-radius: 15px;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+    }
 
-.del-btn {
-    width: 35px;
-    height: 35px;
-    border: none;
-    background-image: url(img/remove-s.jpg);
-}
+    .wrap .btn {
+        width: max-content;
+        border-radius: 10px;
+        padding: 4px 20px;
+        font-size: 16px;
+        margin: 0 10px;
+        margin-bottom: 15px;
+    }
 
-.wrap ul {
-    display: flex;
-    flex-direction: column;
-}
+    .wrap ul {
+        display: flex;
+        flex-direction: column;
+    }
 
 .task {
     position: relative;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
-.task input {
-    position: absolute;
-    opacity: 0;
-}
+    .task input {
+        position: absolute;
+        opacity: 0;
+    }
 
-.checkmark {
-    display: inline-block;
-    width: 35px;
-    height: 35px;
-    background-image: url(img/todo-s.png);
-}
+    .checkmark {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        background-image: url(img/todo-s.png);
+    }
 
-.task input:checked ~ .checkmark {
-    background-image: url(img/done-s.png);
-}
+        .task input:checked ~ .checkmark {
+            background-image: url(img/done-s.png);
+        }
 
-.task-checked {
-    order: 1;
-    opacity: 0.5;
-}
+        .task-checked {
+            order: 1;
+            opacity: 0.5;
+        }
 
-.task-name {
-    width: 250px;
-    font-size: 20px;
-    text-align: center;
-    padding-left: 12px;
-    padding-right: 9px;
-}
+    .task-name {
+        width: 250px;
+        font-size: 20px;
+        text-align: center;
+        padding-left: 12px;
+        padding-right: 9px;
+    }
+
+    .del-btn {
+        width: 35px;
+        height: 35px;
+        border: none;
+        background-image: url(img/remove-s.jpg);
+    }
 
 .alert-block {
     position: absolute;
