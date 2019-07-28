@@ -28,10 +28,11 @@ window.addEventListener(`hashchange`, hashListener);
 // Listen HASH
 function hashListener() {
     locHash = location.hash;
+
     if (locHash.includes(`modify`)) {
         locHash = `#/modify`;
     }
-    console.log(locHash);
+
     switch (locHash) {
         case `#/list`:
             homePage();
@@ -51,7 +52,6 @@ function hashListener() {
 
 // Generate Home page
 function homePage() {
-    console.log(`is home`);
     removeWrap();
 
     let header = document.createElement(`header`);
@@ -89,7 +89,6 @@ function homePage() {
 
 // Generate Add and Modify page
 function addPage(newTask = true) {
-    console.log(`is add page`);
     removeWrap();
 
     let header = document.createElement(`header`);
