@@ -4,9 +4,8 @@ const todoItems = [
     {isDone: false, id: 12345, description: 'Todo 1'}
 ];
 
-// Your code goes here
 let locHash = location.hash;
-let idTask = getMaxId();
+let newId = getMaxId();
 
 if (!locHash) {
     location.hash = '/list';
@@ -14,26 +13,37 @@ if (!locHash) {
 
 const eng = {
     mainHeader: `Simple TODO application`,
-    addOpenBtn: `Add new task`,
+    addBtn: `Add new task`,
     addHeader: `Add new task`,
+    editHeader: `Modify task`,
+    editBtn: `Save changes`,
     btnCancel: `Cancel`,
-    existError: `Error! You can't add already exist item`,
-    editError: `Error! You can't edit already done item`
+    existError: `Error! You can't add already exist item and empty item`,
+    editError: `Error! You can't edit already done item`,
+    pageError: `Page Not Found`
 };
 
 window.addEventListener(`hashchange`, hashListener);
 
 function hashListener() {
     locHash = location.hash;
+    if (locHash.includes(`modify`)) {
+        locHash = `#/modify`;
+    }
     console.log(locHash);
     switch (locHash) {
         case `#/list`:
             homePage();
             break;
         case `#/add`:
-            addPage();
+            addPage(true);
+            break;
+        case `#/modify`:
+            addPage(false);
             break;
         default:
+            location.hash = `#/list`
+            errorAlert(eng.pageError);
             break;
     }
 }
@@ -53,7 +63,7 @@ function homePage() {
     h2.innerHTML = eng.mainHeader;
     header.innerHTML = h2.outerHTML;
 
-    btn.innerHTML = eng.addOpenBtn;
+    btn.innerHTML = eng.addBtn;
     btn.type = `button`;
 
     rootNode.appendChild(wrap);
@@ -65,18 +75,25 @@ function homePage() {
         location.hash = '/add';
     });
 
-    let keys = Object.keys(localStorage);
+    // let keys = Object.keys(localStorage);
 
-    for (let i = 0; i < keys.length; i++) {
-        let localItem = localStorage.getItem(keys[i]);
-        let task = getTasks(JSON.parse(localItem));
-        taskListener(task);
-        ul.appendChild(task);
-    }    
+    // for (let i = 0; i < keys.length; i++) {
+    //     let localItem = localStorage.getItem(keys[i]);
+    //     let task = getTasks(JSON.parse(localItem));
+    //     taskListener(task);
+    //     ul.appendChild(task);
+    // }
+    
+    let allTasks = getTasksData();
+    allTasks.forEach(el => {
+        let taskItem = getTasks(el);
+        taskListener(taskItem);
+        ul.appendChild(taskItem);        
+    });
 
 }
 
-function addPage() {
+function addPage(newTask = true) {
     console.log(`is add page`);
     removeWrap();
 
@@ -87,18 +104,9 @@ function addPage() {
     let btnCancel = document.createElement(`button`);
     let wrap = document.createElement(`div`);
 
-    h2.innerHTML = eng.addHeader;
     header.appendChild(h2);
-
     input.type = `text`;
-
     btnSave.type = `button`;
-    btnSave.innerHTML = eng.addOpenBtn;
-    btnSave.addEventListener(`click`, () => {
-        if (input.value) {
-            addTask(false, ++idTask, input.value);
-        }
-    })
 
     btnCancel.type = `button`;
     btnCancel.innerHTML = eng.btnCancel;
@@ -107,6 +115,33 @@ function addPage() {
     });
 
     wrap.classList.add(`wrap`);
+
+    if(newTask) {
+        h2.innerHTML = eng.addHeader;
+
+        btnSave.innerHTML = eng.addBtn;
+        btnSave.addEventListener(`click`, () => {
+            if (!findTaskDesc(input.value) && input.value) {
+                addTask(false, newId(), input.value);
+            } else {
+                errorAlert(eng.existError);
+            }
+        });
+    } else {
+        let idTask = getTaskId(location.hash);
+        let taskData = getTaskDataById(idTask);
+
+        if (!taskData.isDone) {
+            h2.innerHTML = eng.editHeader;
+            input.value = taskData.description;
+    
+            btnSave.innerHTML = eng.editBtn;
+            btnSave.addEventListener(`click`, editTask);
+        } else {
+            location.hash = '/list';
+            errorAlert(eng.editError);
+        }
+    }
 
     rootNode.appendChild(wrap);
     wrap.appendChild(header);
@@ -126,7 +161,7 @@ function getTasks(data) {
     input.id = `checkbox-${data.id}`;
     if (data.isDone) {
         input.setAttribute(`checked`, `checked`);
-        input.setAttribute(`disabled`, `disabled`);
+        // input.setAttribute(`disabled`, `disabled`);
         li.classList.add(`task-checked`);
     }
 
@@ -159,21 +194,49 @@ function taskListener(item) {
     let text = item.querySelector(`span`);
     let btnDel = item.querySelector(`button`);
     
-    console.log(text);
+    text.addEventListener(`click`, () => {
+        let taskItem = text.parentElement;
+        let thisId = getTaskId(taskItem.id);        
+        location.hash = `#/modify/${thisId}`;
+    });
     btnDel.addEventListener(`click`, removeTask);
     checkbox.addEventListener(`click`, checkStatus);
 }
 
 function checkStatus() {
-    let task = this.parentElement;
-    let thisId = Math.floor(task.id.match(/\d+$/)[0]);
+    let taskItem = this.parentElement;
+    let thisId = getTaskId(taskItem.id);
 
-    let taskData = JSON.parse(localStorage.getItem(`id${thisId}`));
-    taskData.isDone = true;
+    let taskData = getTaskDataById(thisId);
+    if (taskData.isDone) {
+        taskData.isDone = false;
+        taskItem.classList.remove(`task-checked`);
+    } else {
+        taskData.isDone = true;
+        taskItem.classList.add(`task-checked`);
+    }
 
-    this.setAttribute(`disabled`, `disabled`); 
-    task.classList.add(`task-checked`);
+    // this.setAttribute(`disabled`, `disabled`); 
+    // taskItem.classList.add(`task-checked`);
     localStorage.setItem(`id${thisId}`, JSON.stringify(taskData));
+}
+
+function editTask() {
+    let input = this.parentElement.querySelector(`input[type=text]`);
+    let inputValue = input.value;
+    let taskId = getTaskId(location.hash);
+    let taskData = getTaskDataById(taskId);
+
+    if (!findTaskDesc(inputValue) && inputValue || inputValue === taskData.description) {
+        let idTask = getTaskId(location.hash);
+        let taskData = getTaskDataById(idTask);
+        taskData.description = inputValue;
+        
+        localStorage.setItem(`id${idTask}`, JSON.stringify(taskData));
+        location.hash = '/list';
+    } else {
+        errorAlert(eng.existError);
+    }
 }
 
 function removeTask() {
@@ -181,7 +244,6 @@ function removeTask() {
     let thisId = getTaskId(task.id);
     localStorage.removeItem(`id${thisId}`);
     task.remove();
-    console.log();
 }
 
 function removeWrap() {
@@ -191,20 +253,48 @@ function removeWrap() {
     }   
 }
 
-function getMaxId() {
-    let keys = Object.keys(localStorage);
-    let maxId = 0;
+// function getMaxId() {
+//     let keys = Object.keys(localStorage);
+//     let maxId = 0;
 
-    for (let i = 0; i < keys.length; i++) {
-        let localItem = localStorage.getItem(keys[i]);
-        let task = JSON.parse(localItem);
-        let taskId = Math.floor(task.id);
-        if (taskId > maxId) {
-            maxId = taskId;
+//     for (let i = 0; i < keys.length; i++) {
+//         let localItem = localStorage.getItem(keys[i]);
+//         let task = JSON.parse(localItem);
+//         let taskId = Math.floor(task.id);
+//         if (taskId > maxId) {
+//             maxId = taskId;
+//         }
+//     }
+
+//     return maxId;    
+// }
+
+function getMaxId() {
+    // let keys = Object.keys(localStorage);
+    // let maxId = 0;
+
+    // for (let i = 0; i < keys.length; i++) {
+    //     let localItem = localStorage.getItem(keys[i]);
+    //     let task = JSON.parse(localItem);
+    //     let taskId = Math.floor(task.id);
+    //     if (taskId > maxId) {
+    //         maxId = taskId;
+    //     }
+    // }
+
+    let tasksData = getTasksData();
+    let maxId = 0;
+    tasksData.forEach(el => {
+        if (el.id > maxId) {
+            maxId = el.id;
         }
+    });
+
+    function newId(currentID = false) {
+        return currentID ? maxId : ++maxId;
     }
 
-    return maxId;    
+    return newId;
 }
 
 function getTaskId(id) {
@@ -225,17 +315,66 @@ hashListener();
 //     return elements;
 // }
 
-// function allStorage() {
+function getTasksData() {
 
-//     let values = [];
-//     let keys = Object.keys(localStorage);
+    let values = [];
+    let keys = Object.keys(localStorage);
 
-//     for (let i = 0; i < keys.length; i++) {
-//         let localItem = localStorage.getItem(keys[i]);
-//         values.push(JSON.parse(localItem));
-//     }
+    for (let i = 0; i < keys.length; i++) {
+        let localItem = localStorage.getItem(keys[i]);
+        values.push(JSON.parse(localItem));
+    }
 
-//     return values;
+    return values;
+}
+
+function findTaskDesc(description) {
+    let taskData = getTasksData();
+    return taskData.some( function(el) {
+        return el.description === description;
+    });
+}
+
+function getTaskDataById(id) {
+    let dataLS = localStorage.getItem(`id${id}`);
+    let task = JSON.parse(dataLS);
+    return task;
+}
+
+function errorAlert(desc) {
+    let div = document.createElement(`div`);
+    let p = document.createElement(`p`);
+    let btnClose = document.createElement(`span`);
+    const ERROR_TIME = 3000;
+
+    div.classList.add(`alert-block`);
+    p.innerHTML = desc;
+
+    div.appendChild(p);
+    div.appendChild(btnClose);
+    rootNode.appendChild(div);
+
+    let timeToRemove = setTimeout(() => {
+        div.remove();
+    }, ERROR_TIME);
+
+    btnClose.addEventListener(`click`, () => {
+        clearTimeout(timeToRemove);
+        div.remove();
+    });
+} 
+
+// function getTaskDataById(id) {
+//     let tasks = getTasksData();
+//     let task = {};
+
+//     tasks.forEach(el => {
+//         if (el.id === id) {
+//             task = el;
+//         }
+//     });
+ 
+//     return task;
 // }
 
 // rootNode.appendChild(/* Append your list item node*/);

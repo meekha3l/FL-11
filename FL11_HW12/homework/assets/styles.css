@@ -92,3 +92,27 @@ ul {
     padding-left: 12px;
     padding-right: 9px;
 }
+
+.alert-block {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: red;
+    color: #fff;
+}
+
+    .alert-block p {
+        padding: 10px 15px;
+    }
+
+    .alert-block span {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 3px;
+        font-size: 10px;
+    }
+
+    .alert-block span::before {
+        content: '\2716';
+    }
